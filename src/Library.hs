@@ -1,3 +1,5 @@
+{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
+{-# HLINT ignore "Avoid lambda" #-}
 module Library where
 import PdePreludat
 import Data.Int (Int)
@@ -130,3 +132,10 @@ biomaInfinito = UnBioma (biomaConMatsInfinitos madera) fosforo
 uri :: Personaje
 uri = UnPersonaje{nombre = "uri", puntaje = 200, inventario = [fosforo, polloAsado, sueter]}
 
+--El primero de los materiales que tiene cantidad par de caracteres
+herramienta :: Herramienta
+herramienta materiales =  head(filter(\mat -> even(length mat)) materiales)
+
+--flasheada
+herramientaMax :: [a] -> [[a]] -> [a]
+herramientaMax = foldr(\mat actual-> if length mat > length actual then mat else actual)
